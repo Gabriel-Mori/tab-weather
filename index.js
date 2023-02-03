@@ -6,9 +6,12 @@ const description = document.querySelector(".description");
 const icon = document.querySelector(".icon");
 const humidity = document.querySelector(".humidity");
 const temperatureMaxInMIN = document.querySelector(".max-min");
+const form = document.querySelector(".form-action");
 
 const showOnScreen = (dados) => {
-  city.innerHTML = `${dados.name}`;
+  const dadosCod = dados.cod === "404";
+  const message = "Cidade não encontrada.";
+  city.innerHTML = `${dadosCod ? message : dados.name}`;
   temperature.innerHTML = `${Math.floor(dados.main.temp)}°`;
   description.innerHTML = `${dados.weather[0].description}`;
   icon.src = `https://openweathermap.org/img/wn/${dados.weather[0].icon}.png`;
@@ -38,5 +41,12 @@ const clickedButton = () => {
   searchCity(inputValue);
   localStorage.setItem("city", inputValue);
 };
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const inputValue = document.querySelector('[data-js="input-city"]').value;
+  searchCity(inputValue);
+  localStorage.setItem("city", inputValue);
+});
 
 showLocalStorage();
