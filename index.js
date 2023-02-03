@@ -47,6 +47,7 @@ form.addEventListener("submit", (e) => {
   const inputValue = document.querySelector('[data-js="input-city"]').value;
   searchCity(inputValue);
   localStorage.setItem("city", inputValue);
+  form.reset();
 });
 
 showLocalStorage();
